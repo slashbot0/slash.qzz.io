@@ -1,8 +1,8 @@
 {
 "generatedAt": "2026-06-04T19:08:45.225Z",
 "stats": {
-"totalBots": 313,
-"avgScore": 55.4,
+"totalBots": 308,
+"avgScore": 55.1,
 "topLanguage": "Python",
 "flaggedBots": 8,
 "lastScan": "2026-06-04T19:08:45.225Z"
@@ -6415,23 +6415,6 @@
 "category": "ml-ai"
 },
 {
-"fullName": "mvanhorn/last30days-skill",
-"owner": "mvanhorn",
-"repo": "last30days-skill",
-"description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
-"stars": 28621,
-"language": "Python",
-"botScore": 71.5,
-"chains": [],
-"dexes": [
-"polymarket"
-],
-"strategies": [],
-"redFlagCount": 0,
-"updatedAt": "2026-06-06T17:30:29Z",
-"category": "polymarket"
-},
-{
 "fullName": "hsliuping/TradingAgents-CN",
 "owner": "hsliuping",
 "repo": "TradingAgents-CN",
@@ -6521,24 +6504,6 @@
 "category": "ml-ai"
 },
 {
-"fullName": "Barca0412/Introduction-to-Quantitative-Finance",
-"owner": "Barca0412",
-"repo": "Introduction-to-Quantitative-Finance",
-"description": "入门资料整理：1.多因子股票量化框架开源教程 2.学界和业界的经典资料收录 3.AI + 金融的相关工作，包括LLM, Agent, benchmark(evaluation), etc.",
-"stars": 1451,
-"language": "Python",
-"botScore": 73.15,
-"chains": [],
-"dexes": [],
-"strategies": [
-"market-making",
-"ml-ai"
-],
-"redFlagCount": 0,
-"updatedAt": "2026-06-06T14:03:41Z",
-"category": "ml-ai"
-},
-{
 "fullName": "ginlix-ai/LangAlpha",
 "owner": "ginlix-ai",
 "repo": "LangAlpha",
@@ -6594,24 +6559,6 @@
 "redFlagCount": 0,
 "updatedAt": "2026-06-04T14:50:42Z",
 "category": "polymarket"
-},
-{
-"fullName": "kkyon/botflow",
-"owner": "kkyon",
-"repo": "botflow",
-"description": "Python Fast Dataflow programming  framework for Data pipeline work( Web Crawler,Machine Learning,Quantitative Trading.etc)",
-"stars": 1196,
-"language": "Python",
-"botScore": 68.5,
-"chains": [],
-"dexes": [],
-"strategies": [
-"arbitrage",
-"ml-ai"
-],
-"redFlagCount": 0,
-"updatedAt": "2026-05-04T13:30:01Z",
-"category": "ml-ai"
 },
 {
 "fullName": "pskrunner14/trading-bot",
@@ -6698,24 +6645,6 @@
 ],
 "redFlagCount": 0,
 "updatedAt": "2026-06-06T10:07:39Z",
-"category": "ml-ai"
-},
-{
-"fullName": "VivekPa/IntroNeuralNetworks",
-"owner": "VivekPa",
-"repo": "IntroNeuralNetworks",
-"description": "Introducing neural networks to predict stock prices",
-"stars": 772,
-"language": "Python",
-"botScore": 60.55,
-"chains": [],
-"dexes": [],
-"strategies": [
-"arbitrage",
-"ml-ai"
-],
-"redFlagCount": 0,
-"updatedAt": "2026-06-06T08:37:38Z",
 "category": "ml-ai"
 },
 {
@@ -6851,28 +6780,6 @@
 "strategies": [],
 "redFlagCount": 0,
 "updatedAt": "2026-06-06T16:59:43Z",
-"category": "polymarket"
-},
-{
-"fullName": "kuestcom/prediction-market",
-"owner": "kuestcom",
-"repo": "prediction-market",
-"description": "Launch Your Own Web3 Decentralized Prediction Market in Minutes (Polymarket like)",
-"stars": 538,
-"language": "TypeScript",
-"botScore": 79.45,
-"chains": [
-"polygon"
-],
-"dexes": [
-"polymarket"
-],
-"strategies": [
-"arbitrage",
-"market-making"
-],
-"redFlagCount": 0,
-"updatedAt": "2026-06-06T17:14:24Z",
 "category": "polymarket"
 },
 {

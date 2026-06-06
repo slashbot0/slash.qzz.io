@@ -4,8 +4,8 @@ const PROJECTS = [
   {
     icon: "🤖",
     name: "Bot Index",
-    desc: "313 bots open-source découverts sur GitHub, analysés, notés et backtestés — Web3/DEX, Polymarket et ML/AI. Filtrage par catégorie, chaîne, stratégie, sécurité. Leaderboard backtest + paper trading forward.",
-    tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Next.js", cls: "" }, { label: "313 bots", cls: "" }],
+    desc: "308 bots open-source découverts sur GitHub, analysés, notés et backtestés — Web3/DEX, Polymarket et ML/AI. Filtrage par catégorie, chaîne, stratégie, sécurité. Leaderboard backtest + paper trading forward.",
+    tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Next.js", cls: "" }, { label: "308 bots", cls: "" }],
     href: "/bots",
   },
   {
@@ -84,7 +84,7 @@ export default function Home() {
       <h2 className="section-title">Stats</h2>
       <div className="stats">
         <div className="stat"><div className="stat-value">5</div><div className="stat-label">projets</div></div>
-        <div className="stat"><div className="stat-value">313</div><div className="stat-label">bots analysés</div></div>
+        <div className="stat"><div className="stat-value">308</div><div className="stat-label">bots analysés</div></div>
         <div className="stat"><div className="stat-value">Python</div><div className="stat-label">langue principale</div></div>
         <div className="stat"><div className="stat-value">TypeScript</div><div className="stat-label">web</div></div>
       </div>
