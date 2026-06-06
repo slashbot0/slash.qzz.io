@@ -3,9 +3,9 @@ import Link from "next/link"
 const PROJECTS = [
   {
     icon: "🤖",
-    name: "Web3 Bot Index",
-    desc: "253 bots de trading DEX open-source découverts sur GitHub, analysés, notés et backtestés. Filtrage par chaîne, stratégie, sécurité. Leaderboard backtest + paper trading forward.",
-    tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Next.js", cls: "" }, { label: "253 bots", cls: "" }],
+    name: "Bot Index",
+    desc: "313 bots open-source découverts sur GitHub, analysés, notés et backtestés — Web3/DEX, Polymarket et ML/AI. Filtrage par catégorie, chaîne, stratégie, sécurité. Leaderboard backtest + paper trading forward.",
+    tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Next.js", cls: "" }, { label: "313 bots", cls: "" }],
     href: "/bots",
   },
   {
@@ -21,13 +21,6 @@ const PROJECTS = [
     desc: "Analyse des traders météo sur Polymarket : scan de wallets, détection d'early movers, edge scoring, copy-trading et MCP server pour Claude.",
     tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Python", cls: "lang-py" }, { label: "Fastify", cls: "" }],
     href: "/polymarket",
-  },
-  {
-    icon: "🎰",
-    name: "Stake Bot Analyzer",
-    desc: "Moteur de découverte et d'analyse de bots Stake.com open-source : scoring sécurité, vérification Provably Fair, MCP server.",
-    tags: [{ label: "TypeScript", cls: "lang-ts" }, { label: "Fastify", cls: "" }],
-    href: "/stake",
   },
   {
     icon: "💳",
@@ -90,8 +83,8 @@ export default function Home() {
 
       <h2 className="section-title">Stats</h2>
       <div className="stats">
-        <div className="stat"><div className="stat-value">6</div><div className="stat-label">projets</div></div>
-        <div className="stat"><div className="stat-value">253</div><div className="stat-label">bots analysés</div></div>
+        <div className="stat"><div className="stat-value">5</div><div className="stat-label">projets</div></div>
+        <div className="stat"><div className="stat-value">313</div><div className="stat-label">bots analysés</div></div>
         <div className="stat"><div className="stat-value">Python</div><div className="stat-label">langue principale</div></div>
         <div className="stat"><div className="stat-value">TypeScript</div><div className="stat-label">web</div></div>
       </div>

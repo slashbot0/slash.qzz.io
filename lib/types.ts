@@ -11,6 +11,8 @@ export interface Bot {
   strategies: string[]
   redFlagCount: number
   updatedAt: string
+  // Discovery category: "web3-dex" (default), "polymarket" (prediction markets), "ml-ai"
+  category?: string
   // X social pulse (optional — present once the stack's x-social-pulse has run)
   socialScore?: number
   buzzVerdict?: string

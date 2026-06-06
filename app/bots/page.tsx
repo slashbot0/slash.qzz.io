@@ -3,8 +3,8 @@ import type { Dataset } from "../../lib/types"
 import BotExplorer from "./BotExplorer"
 
 export const metadata = {
-  title: "Web3 Bot Index — Slash",
-  description: "253 bots de trading DEX open-source classés par qualité, sécurité et performance backtest.",
+  title: "Bot Index — Slash",
+  description: "313 bots de trading open-source (Web3/DEX, Polymarket, ML/AI) classés par qualité, sécurité et performance backtest.",
 }
 
 export default function Page() {

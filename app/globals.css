@@ -199,6 +199,44 @@ main {
 .chip.clear { color: var(--danger); }
 .count { color: var(--muted); font-size: 13px; margin: 6px 2px 14px; }
 
+/* ─── Category tabs ─── */
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.cat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.cat-tab:hover { color: var(--text); border-color: var(--accent); }
+.cat-tab.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(124,92,255,.12);
+}
+.cat-n {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--panel-2);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.cat-tab.active .cat-n { color: var(--accent); }
+.tag-cat { color: var(--text); border-color: var(--border); background: var(--panel-2); }
+
 /* ─── Bot Grid ─── */
 .grid {
   display: grid;

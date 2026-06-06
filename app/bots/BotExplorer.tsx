@@ -9,8 +9,17 @@ const PROFIT_STRATEGIES = ["arbitrage", "mev", "sniping", "flashloan-arb", "sand
 const fmtPct = (x: number) => `${x >= 0 ? "+" : ""}${(x * 100).toFixed(0)}%`
 type Sort = "rank" | "score" | "buzz" | "backtest" | "alpha"
 
+const CATEGORIES: { value: string; label: string }[] = [
+  { value: "web3-dex", label: "🤖 Web3 / DEX" },
+  { value: "polymarket", label: "🌤️ Polymarket" },
+  { value: "ml-ai", label: "🧠 ML / AI" },
+]
+const catOf = (b: Bot) => b.category ?? "web3-dex"
+const catLabel = (c: string) => CATEGORIES.find((x) => x.value === c)?.label ?? c
+
 export default function BotExplorer({ data }: { data: Dataset }) {
   const [q, setQ] = useState("")
+  const [category, setCategory] = useState("")
   const [chain, setChain] = useState("")
   const [dex, setDex] = useState("")
   const [strategy, setStrategy] = useState("")
@@ -44,6 +53,7 @@ export default function BotExplorer({ data }: { data: Dataset }) {
     const needle = q.trim().toLowerCase()
     return data.bots
       .filter((b) => {
+        if (category && catOf(b) !== category) return false
         if (cleanOnly && b.redFlagCount > 0) return false
         if (chain && !b.chains.includes(chain)) return false
         if (dex && !b.dexes.includes(dex)) return false
@@ -55,17 +65,23 @@ export default function BotExplorer({ data }: { data: Dataset }) {
         return true
       })
       .sort(comparator)
-  }, [data.bots, q, chain, dex, strategy, cleanOnly, comparator])
+  }, [data.bots, q, category, chain, dex, strategy, cleanOnly, comparator])
+
+  const catCounts = useMemo(() => {
+    const c: Record<string, number> = {}
+    for (const b of data.bots) c[catOf(b)] = (c[catOf(b)] ?? 0) + 1
+    return c
+  }, [data.bots])
 
   return (
     <main>
       <header className="hero">
         <h1>
-          Web3 Trading Bot Index <span className="accent">⚡</span>
+          Trading Bot Index <span className="accent">⚡</span>
         </h1>
         <p className="subtitle">
-          Bots de trading DEX open-source découverts sur GitHub — classés par qualité, capacités et{" "}
-          <strong>sécurité</strong>. Analyse statique, jamais d&apos;exécution.
+          Bots de trading open-source découverts sur GitHub — <strong>Web3/DEX</strong>, <strong>Polymarket</strong> et{" "}
+          <strong>ML/AI</strong> — classés par qualité, capacités et <strong>sécurité</strong>. Analyse statique, jamais d&apos;exécution.
         </p>
         {hasBacktest && (
           <span className="navlinks">
@@ -98,6 +114,17 @@ export default function BotExplorer({ data }: { data: Dataset }) {
         )}
       </header>
 
+      <div className="cat-tabs" role="tablist" aria-label="Catégorie de bots">
+        <button role="tab" aria-selected={category === ""} className={`cat-tab${category === "" ? " active" : ""}`} onClick={() => setCategory("")}>
+          Tous <span className="cat-n">{data.bots.length}</span>
+        </button>
+        {CATEGORIES.map((c) => (
+          <button key={c.value} role="tab" aria-selected={category === c.value} className={`cat-tab${category === c.value ? " active" : ""}`} onClick={() => setCategory(c.value)}>
+            {c.label} <span className="cat-n">{catCounts[c.value] ?? 0}</span>
+          </button>
+        ))}
+      </div>
+
       <section className="controls">
         <input className="search" aria-label="Rechercher un bot" placeholder="Rechercher (nom, stratégie, DEX…)" value={q} onChange={(e) => setQ(e.target.value)} />
         <Select label="Chaîne" value={chain} setValue={setChain} options={data.categories.chains} />
@@ -119,8 +146,8 @@ export default function BotExplorer({ data }: { data: Dataset }) {
           <button className="chip" onClick={() => setStrategy("mev")}>MEV</button>
           <button className="chip" onClick={() => setStrategy("sniping")}>sniping</button>
           <button className="chip" onClick={() => setStrategy("copy-trading")}>copy-trading</button>
-          {(chain || dex || strategy || q || cleanOnly) && (
-            <button className="chip clear" onClick={() => { setQ(""); setChain(""); setDex(""); setStrategy(""); setCleanOnly(false) }}>
+          {(chain || dex || strategy || q || cleanOnly || category) && (
+            <button className="chip clear" onClick={() => { setQ(""); setCategory(""); setChain(""); setDex(""); setStrategy(""); setCleanOnly(false) }}>
               ✕ réinitialiser
             </button>
           )}
@@ -164,6 +191,7 @@ function BotCard({ bot, rank }: { bot: Bot; rank: number }) {
         <span className="score-num">{bot.botScore}</span>
       </div>
       <div className="tags">
+        <span className="tag tag-cat">{catLabel(catOf(bot))}</span>
         {bot.strategies.slice(0, 4).map((s) => <span key={s} className="tag tag-strat">{s}</span>)}
         {bot.chains.slice(0, 3).map((c) => <span key={c} className="tag tag-chain">{c}</span>)}
         {bot.dexes.slice(0, 3).map((d) => <span key={d} className="tag tag-dex">{d}</span>)}
