@@ -34,7 +34,7 @@ function Chart({ data: curve }: { data: number[] }) {
   const area = `${x(0).toFixed(1)},${(h - pad).toFixed(1)} ${line} ${x(curve.length - 1).toFixed(1)},${(h - pad).toFixed(1)}`
   const yBase = 1 >= min && 1 <= max ? y(1) : null
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="bigchart">
+    <svg viewBox={`0 0 ${w} ${h}`} className="bigchart" role="img" aria-label={`courbe d'équité out-of-sample, ${up ? "haussière" : "baissière"}`}>
       <polygon points={area} fill={color} fillOpacity="0.08" />
       {yBase != null && <line x1={pad} x2={w - pad} y1={yBase} y2={yBase} stroke="#3a3f52" strokeWidth="1" strokeDasharray="4 4" />}
       <polyline points={line} fill="none" stroke={color} strokeWidth="2.5" />

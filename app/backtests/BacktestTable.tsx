@@ -39,7 +39,7 @@ function spark(data: number[], w: number, h: number, sw = 1.5) {
   const up = data[data.length - 1]! >= data[0]!
   const yBase = 1 >= min && 1 <= max ? h - pad - ((1 - min) / span) * (h - 2 * pad) : null
   return (
-    <svg width={w} height={h} className="spark" viewBox={`0 0 ${w} ${h}`}>
+    <svg width={w} height={h} className="spark" viewBox={`0 0 ${w} ${h}`} role="img" aria-label={`courbe d'équité, ${up ? "haussière" : "baissière"}`}>
       {yBase != null && <line x1={pad} x2={w - pad} y1={yBase} y2={yBase} stroke="#3a3f52" strokeWidth="1" strokeDasharray="3 3" />}
       <polyline points={pts} fill="none" stroke={up ? "#00d4a0" : "#ff6b81"} strokeWidth={sw} />
     </svg>
@@ -110,11 +110,11 @@ export default function BacktestTable({ bots }: { bots: Bot[] }) {
   return (
     <>
       <div className="controls">
-        <select className="select" value={chain} onChange={(e) => setChain(e.target.value)}>
+        <select className="select" aria-label="Filtrer par chaîne" value={chain} onChange={(e) => setChain(e.target.value)}>
           <option value="">Chaîne : toutes</option>
           {chains.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-        <select className="select" value={strat} onChange={(e) => setStrat(e.target.value)}>
+        <select className="select" aria-label="Filtrer par stratégie" value={strat} onChange={(e) => setStrat(e.target.value)}>
           <option value="">Stratégie : toutes</option>
           {strats.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>

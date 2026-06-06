@@ -1,17 +1,20 @@
+import Link from "next/link"
+
 export const metadata = { title: "Polymarket Tools — Slash", description: "Analyse des traders météo sur Polymarket, early movers, edge scoring et copy-trading." }
 
 export default function Page() {
   return (
     <main>
+      <Link className="backlink" href="/">← accueil</Link>
       <div className="project-header">
-        <div className="project-header-icon">🌤️</div>
+        <div className="project-header-icon" aria-hidden>🌤️</div>
         <div className="project-header-content">
           <h1>Polymarket Tools</h1>
           <ul className="meta">
             <li>TypeScript</li>
             <li>Python</li>
             <li>Fastify</li>
-            <li><a href="https://github.com/slashbot0/polymarket-analyzer" target="_blank">GitHub →</a></li>
+            <li><a href="https://github.com/slashbot0/polymarket-analyzer" target="_blank" rel="noreferrer">GitHub →</a></li>
           </ul>
         </div>
       </div>

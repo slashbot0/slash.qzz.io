@@ -1,17 +1,20 @@
+import Link from "next/link"
+
 export const metadata = { title: "Freedom Project — Slash", description: "Bot Telegram/TUI de gestion de domaines gratuits, DNS Cloudflare, emails Gmail et clés API LLM." }
 
 export default function Page() {
   return (
     <main>
+      <Link className="backlink" href="/">← accueil</Link>
       <div className="project-header">
-        <div className="project-header-icon">🌐</div>
+        <div className="project-header-icon" aria-hidden>🌐</div>
         <div className="project-header-content">
           <h1>Freedom Project</h1>
           <ul className="meta">
             <li>Python</li>
             <li>async</li>
             <li>Telegram + TUI</li>
-            <li><a href="https://github.com/slashbot0/freedom-project" target="_blank">GitHub →</a></li>
+            <li><a href="https://github.com/slashbot0/freedom-project" target="_blank" rel="noreferrer">GitHub →</a></li>
           </ul>
         </div>
       </div>

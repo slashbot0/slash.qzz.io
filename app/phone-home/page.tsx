@@ -1,17 +1,20 @@
+import Link from "next/link"
+
 export const metadata = { title: "Phone Home — Slash", description: "Module de tracking Telegram standalone pour sites web." }
 
 export default function Page() {
   return (
     <main>
+      <Link className="backlink" href="/">← accueil</Link>
       <div className="project-header">
-        <div className="project-header-icon">📡</div>
+        <div className="project-header-icon" aria-hidden>📡</div>
         <div className="project-header-content">
           <h1>Phone Home</h1>
           <ul className="meta">
             <li>TypeScript</li>
             <li>Standalone</li>
             <li>Telegram Bot API</li>
-            <li><a href="https://github.com/slashbot0/freedom-project/tree/main/phone-home" target="_blank">GitHub →</a></li>
+            <li><a href="https://github.com/slashbot0/freedom-project/tree/main/phone-home" target="_blank" rel="noreferrer">GitHub →</a></li>
           </ul>
         </div>
       </div>

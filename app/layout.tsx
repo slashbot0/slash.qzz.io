@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import Nav from "./Nav"
 
 export const metadata: Metadata = {
   title: "Slash — trading suite",
@@ -11,16 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body>
-        <nav className="nav">
-          <a href="/" className="nav-logo">/slash</a>
-          <div className="nav-links">
-            <a href="/" className="nav-link">accueil</a>
-            <a href="/bots" className="nav-link">bots</a>
-            <a href="/backtests" className="nav-link">backtests</a>
-            <a href="/paper" className="nav-link">paper</a>
-            <a href="/methodologie" className="nav-link">méthodologie</a>
-          </div>
-        </nav>
+        <Nav />
         {children}
         <footer className="hub-footer">
           <a href="https://github.com/slashbot0">slashbot0</a> · propulsé par GitHub Pages

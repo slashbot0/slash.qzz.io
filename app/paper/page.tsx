@@ -24,7 +24,7 @@ function Chart({ curve, base }: { curve: number[]; base: number }) {
   const color = up ? "#00d4a0" : "#ff6b81"
   const area = `${x(0).toFixed(1)},${(h - pad).toFixed(1)} ${line} ${x(curve.length - 1).toFixed(1)},${(h - pad).toFixed(1)}`
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="bigchart">
+    <svg viewBox={`0 0 ${w} ${h}`} className="bigchart" role="img" aria-label={`courbe de valeur du portefeuille, ${up ? "haussière" : "baissière"}`}>
       <polygon points={area} fill={color} fillOpacity="0.08" />
       <line x1={pad} x2={w - pad} y1={y(base)} y2={y(base)} stroke="#3a3f52" strokeWidth="1" strokeDasharray="4 4" />
       <polyline points={line} fill="none" stroke={color} strokeWidth="2.5" />

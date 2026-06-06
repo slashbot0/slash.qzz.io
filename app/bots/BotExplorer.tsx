@@ -99,11 +99,11 @@ export default function BotExplorer({ data }: { data: Dataset }) {
       </header>
 
       <section className="controls">
-        <input className="search" placeholder="Rechercher (nom, stratégie, DEX…)" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input className="search" aria-label="Rechercher un bot" placeholder="Rechercher (nom, stratégie, DEX…)" value={q} onChange={(e) => setQ(e.target.value)} />
         <Select label="Chaîne" value={chain} setValue={setChain} options={data.categories.chains} />
         <Select label="DEX" value={dex} setValue={setDex} options={data.categories.dexes} />
         <Select label="Stratégie" value={strategy} setValue={setStrategy} options={data.categories.strategies} />
-        <select className="select" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+        <select className="select" aria-label="Trier les bots" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
           {hasSocial && <option value="rank">Trier : rang (qualité + buzz)</option>}
           <option value="score">Trier : score qualité</option>
           {hasSocial && <option value="buzz">Trier : profit / buzz 🔥</option>}
@@ -205,7 +205,7 @@ function Stat({ label, value, warn }: { label: string; value: number | string; w
 
 function Select({ label, value, setValue, options }: { label: string; value: string; setValue: (v: string) => void; options: string[] }) {
   return (
-    <select className="select" value={value} onChange={(e) => setValue(e.target.value)}>
+    <select className="select" aria-label={label} value={value} onChange={(e) => setValue(e.target.value)}>
       <option value="">{label} : tous</option>
       {options.map((o) => <option key={o} value={o}>{o}</option>)}
     </select>

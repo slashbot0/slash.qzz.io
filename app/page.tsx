@@ -62,18 +62,30 @@ export default function Home() {
 
       <h2 className="section-title">Projets</h2>
       <div className="projects">
-        {PROJECTS.map((p) => (
-          <a key={p.name} href={p.href} className="project-card">
-            <div className="project-icon">{p.icon}</div>
-            <h3 className="project-name">{p.name}</h3>
-            <p className="project-desc">{p.desc}</p>
-            <div className="project-tags">
-              {p.tags.map((t) => (
-                <span key={t.label} className={`project-tag ${t.cls}`}>{t.label}</span>
-              ))}
-            </div>
-          </a>
-        ))}
+        {PROJECTS.map((p) => {
+          const external = p.href.startsWith("http")
+          const inner = (
+            <>
+              <div className="project-icon" aria-hidden>{p.icon}</div>
+              <h3 className="project-name">{p.name}</h3>
+              <p className="project-desc">{p.desc}</p>
+              <div className="project-tags">
+                {p.tags.map((t) => (
+                  <span key={t.label} className={`project-tag ${t.cls}`}>{t.label}</span>
+                ))}
+              </div>
+            </>
+          )
+          return external ? (
+            <a key={p.name} href={p.href} className="project-card" target="_blank" rel="noreferrer">
+              {inner}
+            </a>
+          ) : (
+            <Link key={p.name} href={p.href} className="project-card">
+              {inner}
+            </Link>
+          )
+        })}
       </div>
 
       <h2 className="section-title">Stats</h2>

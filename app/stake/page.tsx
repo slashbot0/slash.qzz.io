@@ -1,17 +1,20 @@
+import Link from "next/link"
+
 export const metadata = { title: "Stake Bot Analyzer — Slash", description: "Moteur de découverte, analyse et scoring de bots Stake.com open-source." }
 
 export default function Page() {
   return (
     <main>
+      <Link className="backlink" href="/">← accueil</Link>
       <div className="project-header">
-        <div className="project-header-icon">🎰</div>
+        <div className="project-header-icon" aria-hidden>🎰</div>
         <div className="project-header-content">
           <h1>Stake Bot Analyzer</h1>
           <ul className="meta">
             <li>TypeScript</li>
             <li>Fastify</li>
             <li>REST API</li>
-            <li><a href="https://github.com/slashbot0/stake-bot-analyzer" target="_blank">GitHub →</a></li>
+            <li><a href="https://github.com/slashbot0/stake-bot-analyzer" target="_blank" rel="noreferrer">GitHub →</a></li>
           </ul>
         </div>
       </div>

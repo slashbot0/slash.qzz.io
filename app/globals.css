@@ -439,7 +439,7 @@ main {
   .nav { padding: 12px 16px; gap: 12px; flex-wrap: wrap; }
   .nav-links { gap: 8px; }
   .hero { padding: 24px 18px; }
-  hero h1 { font-size: 26px; }
+  .hero h1 { font-size: 26px; }
   .project-header { flex-direction: column; gap: 12px; }
   .projects { grid-template-columns: 1fr; }
   .grid { grid-template-columns: 1fr; }

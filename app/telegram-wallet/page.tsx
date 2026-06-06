@@ -1,17 +1,20 @@
+import Link from "next/link"
+
 export const metadata = { title: "Telegram Wallet Bot — Slash", description: "Bot Telegram multi-chain pour la gestion de wallets crypto." }
 
 export default function Page() {
   return (
     <main>
+      <Link className="backlink" href="/">← accueil</Link>
       <div className="project-header">
-        <div className="project-header-icon">💳</div>
+        <div className="project-header-icon" aria-hidden>💳</div>
         <div className="project-header-content">
           <h1>Telegram Wallet Bot</h1>
           <ul className="meta">
             <li>Node.js</li>
             <li>Telegraf</li>
             <li>Multi-chain</li>
-            <li><a href="https://github.com/slashbot0/telegram-trade-wallet-bot" target="_blank">GitHub →</a></li>
+            <li><a href="https://github.com/slashbot0/telegram-trade-wallet-bot" target="_blank" rel="noreferrer">GitHub →</a></li>
           </ul>
         </div>
       </div>
