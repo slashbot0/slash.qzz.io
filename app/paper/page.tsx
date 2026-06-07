@@ -1,13 +1,13 @@
 import Link from "next/link"
 import paper from "../../data/paper.json"
+import paperPm from "../../data/paper-polymarket.json"
 import live from "../../data/paper-live.json"
 
 export const metadata = {
   title: "Paper trading — Slash",
-  description: "Portefeuille papier simulé à partir des backtests out-of-sample.",
+  description: "Portefeuilles papier simulés (Web3/DEX + Polymarket) à partir des backtests et simulations.",
 }
 
-type Pos = (typeof paper.positions)[number]
 const pct = (x: number, signed = false) => `${signed && x >= 0 ? "+" : ""}${(x * 100).toFixed(1)}%`
 const eur = (x: number) => `$${x.toLocaleString("fr-FR", { maximumFractionDigits: 0 })}`
 const cls = (x: number) => (x >= 0 ? "pos" : "neg")
@@ -32,79 +32,102 @@ function Chart({ curve, base }: { curve: number[]; base: number }) {
   )
 }
 
+type Paper = typeof paper
+type Pos = Paper["positions"][number]
+
+function Portfolio({ data, icon, title, note }: { data: Paper; icon: string; title: string; note: string }) {
+  const p = data.portfolio
+  return (
+    <section className="panel">
+      <h2 className="panel-title">{icon} {title}</h2>
+      <p className="prose" style={{ marginTop: -4 }}>{eur(data.capital)} · {data.strategy}. {note}</p>
+      <div className="bstats">
+        <div className="bstat bstat-big"><div className="bstat-value">{eur(p.finalValue)}</div><div className="bstat-label">valeur finale (départ {eur(p.initialValue)})</div></div>
+        <div className="bstat bstat-big"><div className={`bstat-value ${cls(p.pnl)}`}>{p.pnl >= 0 ? "+" : ""}{eur(p.pnl)}</div><div className="bstat-label">P&amp;L</div></div>
+        <div className="bstat bstat-big"><div className={`bstat-value ${cls(p.return)}`}>{pct(p.return, true)}</div><div className="bstat-label">rendement</div></div>
+        <div className="bstat bstat-big"><div className="bstat-value neg">{pct(p.maxDrawdown)}</div><div className="bstat-label">max drawdown</div></div>
+      </div>
+      <Chart curve={p.curve} base={data.capital} />
+      <div className="table-wrap" style={{ marginTop: 16 }}>
+        <table className="bt-table">
+          <thead>
+            <tr>
+              <th className="left">bot</th>
+              <th className="left">stratégie</th>
+              <th>poids</th>
+              <th>montant</th>
+              <th>valeur finale</th>
+              <th>rendement</th>
+              <th>α vs hold</th>
+              <th>win</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.positions.map((pos: Pos) => (
+              <tr key={pos.fullName}>
+                <td className="left"><Link href={`/bot/${pos.owner}/${pos.repo}`}>{pos.fullName}</Link></td>
+                <td className="left muted">{pos.strategy}</td>
+                <td>{pct(pos.weight)}</td>
+                <td>{eur(pos.amount)}</td>
+                <td>{eur(pos.finalValue)}</td>
+                <td className={cls(pos.return)}>{pct(pos.return, true)}</td>
+                <td className={cls(pos.alpha)}>{pct(pos.alpha, true)}</td>
+                <td>{pos.winRate == null ? "—" : pct(pos.winRate)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
 export default function Page() {
-  const p = paper.portfolio
+  const pmReturn = paperPm.portfolio.return
+  const webReturn = paper.portfolio.return
   return (
     <main>
       <header className="hero">
         <Link className="backlink" href="/bots">← retour à l&apos;index</Link>
         <h1>Paper trading <span className="accent">🧪</span></h1>
-        <p className="subtitle">Portefeuille <strong>papier</strong> (argent fictif) : {eur(paper.capital)} {paper.strategy}, suivi sur la période backtest out-of-sample.</p>
-        <p className="sim-banner">🧪 <strong>Simulation, pas d&apos;argent réel.</strong></p>
+        <span className="navlinks">
+          <Link className="navlink" href="/backtests">📈 Backtests →</Link>
+          <Link className="navlink" href="/methodologie">🔬 Méthodologie →</Link>
+        </span>
+        <p className="subtitle">Deux portefeuilles <strong>papier</strong> (argent fictif) : un panier <strong>Web3/DEX</strong> rejoué sur la période backtest, et un panier <strong>Polymarket</strong> issu de la simulation marché de prédiction.</p>
+        <p className="sim-banner">🧪 <strong>Simulation, pas d&apos;argent réel.</strong> Les portefeuilles sélectionnent les meilleurs bots par alpha (sélection a posteriori).</p>
         <div className="bstats">
-          <div className="bstat bstat-big"><div className="bstat-value">{eur(p.finalValue)}</div><div className="bstat-label">valeur finale (départ {eur(p.initialValue)})</div></div>
-          <div className="bstat bstat-big"><div className={`bstat-value ${cls(p.pnl)}`}>{p.pnl >= 0 ? "+" : ""}{eur(p.pnl)}</div><div className="bstat-label">P&amp;L</div></div>
-          <div className="bstat bstat-big"><div className={`bstat-value ${cls(p.return)}`}>{pct(p.return, true)}</div><div className="bstat-label">rendement</div></div>
-          <div className="bstat bstat-big"><div className="bstat-value neg">{pct(p.maxDrawdown)}</div><div className="bstat-label">max drawdown</div></div>
+          <div className="bstat bstat-big"><div className={`bstat-value ${cls(webReturn)}`}>{pct(webReturn, true)}</div><div className="bstat-label">Web3/DEX</div></div>
+          <div className="bstat bstat-big"><div className={`bstat-value ${cls(pmReturn)}`}>{pct(pmReturn, true)}</div><div className="bstat-label">Polymarket</div></div>
         </div>
       </header>
 
+      <Portfolio
+        data={paper}
+        icon="🤖"
+        title="Panier Web3 / DEX"
+        note="Rejoué sur la période backtest out-of-sample (OHLC Binance réels)."
+      />
+
+      <Portfolio
+        data={paperPm as unknown as Paper}
+        icon="🌤️"
+        title="Panier Polymarket"
+        note="Issu de la simulation forward des archétypes de stratégie (marché de prédiction synthétique)."
+      />
+
       <section className="panel">
-        <h2 className="panel-title">📡 Forward (live) — depuis {live.startDate}, mis à jour {live.updatedAt}</h2>
+        <h2 className="panel-title">📡 Forward — instantané du {live.updatedAt}</h2>
         <div className="bstats">
           <div className="bstat bstat-big"><div className={`bstat-value ${cls(live.portfolio.return)}`}>{pct(live.portfolio.return, true)}</div><div className="bstat-label">rendement forward ({live.days} j)</div></div>
           <div className="bstat bstat-big"><div className="bstat-value">{eur(live.portfolio.finalValue)}</div><div className="bstat-label">valeur (départ {eur(live.capital)})</div></div>
           <div className="bstat bstat-big"><div className="bstat-value neg">{pct(live.portfolio.maxDrawdown)}</div><div className="bstat-label">max drawdown</div></div>
         </div>
         <Chart curve={live.portfolio.curve.map((c) => c.value)} base={live.capital} />
-        <p className="meta-line">🤖 Mis à jour <strong>chaque jour</strong> (GitHub Actions). C&apos;est du <strong>vrai forward</strong>, pas du backtest rétro-ajusté.</p>
+        <p className="meta-line">📸 Instantané forward depuis {live.startDate} (simulé). L&apos;automatisation quotidienne et l&apos;exécution réelle sont les étapes suivantes — <strong>ce n&apos;est pas encore mis à jour automatiquement.</strong></p>
       </section>
 
-      <section className="panel">
-        <h2 className="panel-title">Réplay backtest (période out-of-sample)</h2>
-        <Chart curve={p.curve} base={paper.capital} />
-      </section>
-
-      <section className="panel">
-        <h2 className="panel-title">Positions ({paper.positions.length})</h2>
-        <div className="table-wrap">
-          <table className="bt-table">
-            <thead>
-              <tr>
-                <th className="left">bot</th>
-                <th className="left">stratégie</th>
-                <th>poids</th>
-                <th>montant</th>
-                <th>valeur finale</th>
-                <th>rendement</th>
-                <th>α vs hold</th>
-                <th>win</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paper.positions.map((pos: Pos) => (
-                <tr key={pos.fullName}>
-                  <td className="left"><Link href={`/bot/${pos.owner}/${pos.repo}`}>{pos.fullName}</Link></td>
-                  <td className="left muted">{pos.strategy}</td>
-                  <td>{pct(pos.weight)}</td>
-                  <td>{eur(pos.amount)}</td>
-                  <td>{eur(pos.finalValue)}</td>
-                  <td className={cls(pos.return)}>{pct(pos.return, true)}</td>
-                  <td className={cls(pos.alpha)}>{pct(pos.alpha, true)}</td>
-                  <td>{pos.winRate == null ? "—" : pct(pos.winRate)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="panel">
-        <h2 className="panel-title">Et après ?</h2>
-        <p className="prose">Portefeuille <strong>statique</strong> (rejoué sur la période backtest). Le vrai <em>paper trading forward</em> puis l&apos;exécution réelle sont les étapes suivantes.</p>
-      </section>
-
-      <footer className="footer">⚠️ Paper trading simulé. Les performances passées ne préjugent pas des résultats futurs.</footer>
+      <footer className="footer">⚠️ Paper trading simulé. La sélection des meilleurs bots par alpha est faite a posteriori ; les performances passées simulées ne préjugent pas des résultats futurs.</footer>
     </main>
   )
 }

@@ -70,7 +70,11 @@ function Detail({ b }: { b: Bot }) {
     <div className="bt-detail">
       <div className="bt-detail-chart">
         <Spark data={b.backtestCurve} big />
-        <span className="muted">courbe d&apos;équité out-of-sample (base 100, moyenne multi-actifs)</span>
+        <span className="muted">
+          {b.backtestKind === "prediction-market"
+            ? "courbe d'équité simulée (base 100, ~6 mois, forward sur marché de prédiction)"
+            : "courbe d'équité out-of-sample (base 100, moyenne multi-actifs)"}
+        </span>
       </div>
       <div className="bt-detail-grid">
         {items.map(([label, val, cls]) => (
@@ -84,32 +88,46 @@ function Detail({ b }: { b: Bot }) {
   )
 }
 
+const kindBadge = (b: Bot) =>
+  b.backtestKind === "prediction-market"
+    ? { label: "🌤️ prédiction", cls: "kind-pm", title: "simulation forward d'un marché de prédiction (Polymarket)" }
+    : { label: "📈 spot", cls: "kind-spot", title: "backtest out-of-sample sur OHLC Binance réels" }
+
 export default function BacktestTable({ bots }: { bots: Bot[] }) {
   const [key, setKey] = useState<Key>("backtestAlpha")
   const [dir, setDir] = useState<1 | -1>(-1)
   const [chain, setChain] = useState("")
   const [strat, setStrat] = useState("")
+  const [kind, setKind] = useState("")
   const [open, setOpen] = useState<string | null>(null)
 
   const chains = useMemo(() => uniq(bots.flatMap((b) => b.chains)), [bots])
   const strats = useMemo(() => uniq(bots.flatMap((b) => b.strategies)), [bots])
+  const hasKinds = useMemo(() => new Set(bots.map((b) => b.backtestKind ?? "spot")).size > 1, [bots])
 
   const rows = useMemo(() => {
     const v = (b: Bot) => (b[key] ?? -Infinity) as number
     return bots
-      .filter((b) => (!chain || b.chains.includes(chain)) && (!strat || b.strategies.includes(strat)))
+      .filter((b) => (!chain || b.chains.includes(chain)) && (!strat || b.strategies.includes(strat)) && (!kind || (b.backtestKind ?? "spot") === kind))
       .sort((a, b) => (v(a) - v(b)) * dir)
-  }, [bots, key, dir, chain, strat])
+  }, [bots, key, dir, chain, strat, kind])
 
   const onSort = (k: Key) => {
     if (k === key) setDir((d) => (d === 1 ? -1 : 1))
     else { setKey(k); setDir(-1) }
   }
-  const colSpan = 4 + COLS.length
+  const colSpan = 5 + COLS.length
 
   return (
     <>
       <div className="controls">
+        {hasKinds && (
+          <select className="select" aria-label="Filtrer par méthode" value={kind} onChange={(e) => setKind(e.target.value)}>
+            <option value="">Méthode : toutes</option>
+            <option value="spot">📈 backtest spot</option>
+            <option value="prediction-market">🌤️ marché de prédiction</option>
+          </select>
+        )}
         <select className="select" aria-label="Filtrer par chaîne" value={chain} onChange={(e) => setChain(e.target.value)}>
           <option value="">Chaîne : toutes</option>
           {chains.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -118,7 +136,7 @@ export default function BacktestTable({ bots }: { bots: Bot[] }) {
           <option value="">Stratégie : toutes</option>
           {strats.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
-        {(chain || strat) && <button className="chip clear" onClick={() => { setChain(""); setStrat("") }}>✕ réinitialiser</button>}
+        {(chain || strat || kind) && <button className="chip clear" onClick={() => { setChain(""); setStrat(""); setKind("") }}>✕ réinitialiser</button>}
         <span className="count">{rows.length} bot(s) · clique une ligne pour le détail</span>
       </div>
 
@@ -128,8 +146,9 @@ export default function BacktestTable({ bots }: { bots: Bot[] }) {
             <tr>
               <th></th>
               <th className="left">bot</th>
+              <th className="left">méthode</th>
               <th className="left">stratégie</th>
-              <th>équité (oos)</th>
+              <th>équité</th>
               {COLS.map((c) => (
                 <th key={c.key} title={c.title} onClick={() => onSort(c.key)} className={key === c.key ? "sorted" : ""}>
                   {c.label}{key === c.key ? (dir === -1 ? " ↓" : " ↑") : ""}
@@ -146,6 +165,9 @@ export default function BacktestTable({ bots }: { bots: Bot[] }) {
                     <Link href={`/bot/${b.owner}/${b.repo}`} onClick={(e) => e.stopPropagation()}>
                       {b.fullName}
                     </Link>
+                  </td>
+                  <td className="left">
+                    <span className={`kind-badge ${kindBadge(b).cls}`} title={kindBadge(b).title}>{kindBadge(b).label}</span>
                   </td>
                   <td className="left muted">{b.backtestStrategy} · {b.backtestMarket}</td>
                   <td><Spark data={b.backtestCurve} /></td>

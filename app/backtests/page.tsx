@@ -17,6 +17,8 @@ export default function Page() {
   const wins = bots.map((b) => b.backtestWinRate).filter((w): w is number => w != null)
   const avgWin = wins.length ? wins.reduce((a, b) => a + b, 0) / wins.length : 0
   const avgAlpha = bots.length ? bots.reduce((a, b) => a + (b.backtestAlpha ?? 0), 0) / bots.length : 0
+  const nSpot = bots.filter((b) => (b.backtestKind ?? "spot") === "spot").length
+  const nPm = bots.filter((b) => b.backtestKind === "prediction-market").length
   return (
     <main>
       <header className="hero">
@@ -26,8 +28,8 @@ export default function Page() {
           <Link className="navlink" href="/paper">🧪 Paper trading →</Link>
           <Link className="navlink" href="/methodologie">🔬 Méthodologie →</Link>
         </span>
-        <p className="subtitle">Performance <strong>simulée out-of-sample</strong> des {bots.length} bots backtestables.</p>
-        <p className="sim-banner">📈 Backtests <strong>simulés</strong> walk-forward. <strong>Pas des gains réels.</strong></p>
+        <p className="subtitle">Performance <strong>simulée</strong> de {bots.length} bots : {nSpot} en <strong>backtest spot</strong> walk-forward (OHLC Binance réels) et {nPm} en <strong>simulation marché de prédiction</strong> (Polymarket).</p>
+        <p className="sim-banner">📈 <strong>Spot</strong> : backtest out-of-sample sur données réelles. 🌤️ <strong>Marché de prédiction</strong> : simulation forward de l&apos;archétype de stratégie. Les deux sont <strong>simulés — pas des gains réels.</strong></p>
         <div className="stats">
           <div className="stat"><div className="stat-value">{beat}/{bots.length}</div><div className="stat-label">battent le hold (α &gt; 0)</div></div>
           <div className="stat"><div className="stat-value">{pct(avgWin)}</div><div className="stat-label">win rate moyen</div></div>

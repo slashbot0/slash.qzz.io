@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import Nav from "./Nav"
+import Beacon from "./Beacon"
 
 export const metadata: Metadata = {
   title: "Slash — trading suite",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body>
+        <Beacon />
         <Nav />
         {children}
         <footer className="hub-footer">

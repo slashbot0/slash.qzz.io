@@ -55,6 +55,7 @@ export default function Page({ params }: { params: { owner: string; repo: string
   const bot: Bot | undefined = data.bots.find((b) => b.fullName === `${params.owner}/${params.repo}`)
   if (!bot || !bot.backtestable) notFound()
   const badge = securityBadge(bot.redFlagCount)
+  const isPm = bot.backtestKind === "prediction-market"
 
   return (
     <main>
@@ -65,13 +66,17 @@ export default function Page({ params }: { params: { owner: string; repo: string
         <div className="bstats">
           <Stat label="win rate (trades gagnants)" value={pct(bot.backtestWinRate)} big color="accent" />
           <Stat label="α vs hold" value={pct(bot.backtestAlpha, true)} big color={cls(bot.backtestAlpha)} />
-          <Stat label="rendement (oos)" value={pct(bot.backtestReturn, true)} big color={cls(bot.backtestReturn)} />
+          <Stat label={isPm ? "rendement (sim)" : "rendement (oos)"} value={pct(bot.backtestReturn, true)} big color={cls(bot.backtestReturn)} />
         </div>
-        <p className="sim-banner">📈 Backtest <strong>simulé</strong> out-of-sample ({bot.backtestStrategy}, {bot.backtestMarket}).</p>
+        <p className="sim-banner">
+          {isPm
+            ? <>🌤️ <strong>Simulation</strong> marché de prédiction ({bot.backtestStrategy}) — forward sur l&apos;archétype de stratégie, pas un backtest sur fills réels.</>
+            : <>📈 Backtest <strong>simulé</strong> out-of-sample ({bot.backtestStrategy}, {bot.backtestMarket}).</>}
+        </p>
       </header>
 
       <section className="panel">
-        <h2 className="panel-title">Courbe d&apos;équité (base 100, moyenne multi-actifs)</h2>
+        <h2 className="panel-title">{isPm ? "Courbe d'équité simulée (base 100, ~6 mois)" : "Courbe d'équité (base 100, moyenne multi-actifs)"}</h2>
         {bot.backtestCurve && bot.backtestCurve.length > 1 ? <Chart data={bot.backtestCurve} /> : <p className="muted">pas de courbe disponible</p>}
       </section>
 
@@ -88,7 +93,9 @@ export default function Page({ params }: { params: { owner: string; repo: string
           <Stat label="score code" value={num(bot.botScore, 0)} />
         </div>
         <p className="report-line">
-          📋 Backtest : <strong>{bot.backtestStrategy}</strong> sur {bot.backtestAssets?.length ?? 0} actif(s) ({(bot.backtestAssets ?? []).join(", ")}). Walk-forward out-of-sample, frais + slippage.
+          {isPm
+            ? <>📋 Simulation : <strong>{bot.backtestStrategy}</strong> sur marché de prédiction synthétique (~180 marks). Monte-Carlo déterministe pondéré par la qualité du code.</>
+            : <>📋 Backtest : <strong>{bot.backtestStrategy}</strong> sur {bot.backtestAssets?.length ?? 0} actif(s) ({(bot.backtestAssets ?? []).join(", ")}). Walk-forward out-of-sample, frais + slippage.</>}
         </p>
       </section>
 

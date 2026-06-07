@@ -20,6 +20,10 @@ export interface Bot {
   mentions?: number
   // Simulated out-of-sample backtest (present once `npm run enrich` has run)
   backtestable?: boolean
+  // How the P&L was simulated:
+  //  - "spot": out-of-sample backtest on real Binance OHLC (grid/DCA)
+  //  - "prediction-market": forward simulation of the strategy archetype (Polymarket)
+  backtestKind?: "spot" | "prediction-market"
   backtestReturn?: number // fraction, e.g. -0.114 = -11.4% (simulated, not real)
   backtestSharpe?: number
   backtestSortino?: number
