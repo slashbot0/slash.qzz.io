@@ -3,32 +3,40 @@
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
-// Edge tracker endpoint (phone-home). Static hosting can't read the visitor IP,
-// so we beacon the tracker, which reads the real IP from its request headers and
-// notifies Telegram. The endpoint is self-hosted behind an outbound tunnel; the
-// `bypass-tunnel-reminder` header skips the tunnel's interstitial, which forces a
-// CORS request (hence fetch rather than an <img>). No PII beyond standard headers.
-const TRACK_URL = "https://slashqzztrk.loca.lt/"
-
+// Static hosting can't read the visitor IP. We beacon a self-hosted tracker
+// (behind an outbound tunnel) which reads the real IP from its request headers
+// and notifies Telegram. The tunnel URL can change across restarts, so we don't
+// hardcode it: the box publishes the current URL to /track-endpoint.json
+// (same-origin, no CORS), we read it, then fire a 1x1 <img> at it (cross-origin
+// images need no CORS). No PII beyond standard headers.
 export default function Beacon() {
   const pathname = usePathname()
   useEffect(() => {
-    try {
-      const params = new URLSearchParams({
-        p: pathname || "/",
-        r: document.referrer || "",
-        s: `${window.screen.width}x${window.screen.height}`,
-        tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
-      })
-      void fetch(`${TRACK_URL}?${params.toString()}`, {
-        method: "GET",
-        mode: "cors",
-        cache: "no-store",
-        keepalive: true,
-        headers: { "bypass-tunnel-reminder": "1" },
-      }).catch(() => {})
-    } catch {
-      /* tracking is best-effort; never break the page */
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch(`/track-endpoint.json?t=${Date.now()}`, {
+          cache: "no-store",
+        })
+        if (!res.ok) return
+        const cfg = (await res.json()) as { url?: string }
+        if (cancelled || !cfg?.url) return
+
+        const params = new URLSearchParams({
+          p: pathname || "/",
+          r: document.referrer || "",
+          s: `${window.screen.width}x${window.screen.height}`,
+          tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+        })
+        const img = new Image()
+        img.referrerPolicy = "no-referrer-when-downgrade"
+        img.src = `${cfg.url}?${params.toString()}`
+      } catch {
+        /* tracking is best-effort; never break the page */
+      }
+    })()
+    return () => {
+      cancelled = true
     }
   }, [pathname])
   return null
