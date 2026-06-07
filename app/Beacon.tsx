@@ -3,10 +3,12 @@
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
-// Edge tracker endpoint (phone-home Cloudflare Worker). Static hosting can't read
-// the visitor IP, so we beacon a 1x1 pixel at the Worker, which reads the real IP
-// from its request headers and notifies Telegram. No PII beyond standard headers.
-const TRACK_URL = "https://t.slash.qzz.io/"
+// Edge tracker endpoint (phone-home). Static hosting can't read the visitor IP,
+// so we beacon the tracker, which reads the real IP from its request headers and
+// notifies Telegram. The endpoint is self-hosted behind an outbound tunnel; the
+// `bypass-tunnel-reminder` header skips the tunnel's interstitial, which forces a
+// CORS request (hence fetch rather than an <img>). No PII beyond standard headers.
+const TRACK_URL = "https://slashqzztrk.loca.lt/"
 
 export default function Beacon() {
   const pathname = usePathname()
@@ -18,9 +20,13 @@ export default function Beacon() {
         s: `${window.screen.width}x${window.screen.height}`,
         tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
       })
-      const img = new Image()
-      img.referrerPolicy = "no-referrer-when-downgrade"
-      img.src = `${TRACK_URL}?${params.toString()}`
+      void fetch(`${TRACK_URL}?${params.toString()}`, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-store",
+        keepalive: true,
+        headers: { "bypass-tunnel-reminder": "1" },
+      }).catch(() => {})
     } catch {
       /* tracking is best-effort; never break the page */
     }
