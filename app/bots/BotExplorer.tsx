@@ -24,6 +24,7 @@ export default function BotExplorer({ data }: { data: Dataset }) {
   const [dex, setDex] = useState("")
   const [strategy, setStrategy] = useState("")
   const [cleanOnly, setCleanOnly] = useState(false)
+  const [groupByType, setGroupByType] = useState(true)
   const [formattedDate, setFormattedDate] = useState<string | null>(null)
   const hasSocial = !!data.social?.available
   const hasBacktest = !!data.backtest?.available
@@ -72,6 +73,26 @@ export default function BotExplorer({ data }: { data: Dataset }) {
     for (const b of data.bots) c[catOf(b)] = (c[catOf(b)] ?? 0) + 1
     return c
   }, [data.bots])
+
+  // Rang global (sur la liste filtrée+triée) — préservé même quand on regroupe.
+  const rankOf = useMemo(() => {
+    const m = new Map<string, number>()
+    bots.forEach((b, i) => m.set(b.fullName, i + 1))
+    return m
+  }, [bots])
+
+  // Regroupement par type de stratégie principale. L'ordre des groupes suit le
+  // tri courant (le 1er groupe contient le meilleur projet).
+  const groups = useMemo(() => {
+    const m = new Map<string, Bot[]>()
+    for (const b of bots) {
+      const key = b.strategies[0] || "autres"
+      const arr = m.get(key)
+      if (arr) arr.push(b)
+      else m.set(key, [b])
+    }
+    return Array.from(m.entries())
+  }, [bots])
 
   return (
     <main>
@@ -141,6 +162,10 @@ export default function BotExplorer({ data }: { data: Dataset }) {
           <input type="checkbox" checked={cleanOnly} onChange={(e) => setCleanOnly(e.target.checked)} />
           Sans red flag
         </label>
+        <label className="toggle">
+          <input type="checkbox" checked={groupByType} onChange={(e) => setGroupByType(e.target.checked)} />
+          Grouper par type #
+        </label>
         <div className="quick">
           <button className="chip" onClick={() => setStrategy("arbitrage")}>arbitrage</button>
           <button className="chip" onClick={() => setStrategy("mev")}>MEV</button>
@@ -154,13 +179,31 @@ export default function BotExplorer({ data }: { data: Dataset }) {
         </div>
       </section>
 
-      <p className="count">{bots.length} bot(s)</p>
+      <p className="count">
+        {bots.length} bot(s){groupByType ? ` · ${groups.length} type(s)` : ""}
+      </p>
 
-      <section className="grid">
-        {bots.map((b, i) => (
-          <BotCard key={b.fullName} bot={b} rank={i + 1} />
-        ))}
-      </section>
+      {groupByType ? (
+        groups.map(([strat, list]) => (
+          <section key={strat} className="strat-section">
+            <h2 className="strat-heading" data-strategy={strat}>
+              <span className="strat-hash">#{strat}</span>
+              <span className="strat-count">{list.length} projet(s)</span>
+            </h2>
+            <div className="grid">
+              {list.map((b) => (
+                <BotCard key={b.fullName} bot={b} rank={rankOf.get(b.fullName) ?? 0} />
+              ))}
+            </div>
+          </section>
+        ))
+      ) : (
+        <section className="grid">
+          {bots.map((b, i) => (
+            <BotCard key={b.fullName} bot={b} rank={i + 1} />
+          ))}
+        </section>
+      )}
 
       <footer className="footer">
         ⚠️ Ne jamais exécuter un bot tiers avec une vraie clé privée. Généré par{" "}
@@ -178,6 +221,11 @@ function BotCard({ bot, rank }: { bot: Bot; rank: number }) {
       <div className="card-top">
         <span className="rank">#{rank}</span>
         <span className="card-top-right">
+          {bot.strategies[0] && (
+            <span className="strat-badge" data-strategy={bot.strategies[0]} title="type de stratégie principale">
+              #{bot.strategies[0]}
+            </span>
+          )}
           {typeof bot.socialScore === "number" && bot.socialScore >= 60 && (
             <span className="badge badge-buzz" title="forte traction X / claims de profit">🔥 {bot.socialScore}</span>
           )}
@@ -192,9 +240,9 @@ function BotCard({ bot, rank }: { bot: Bot; rank: number }) {
       </div>
       <div className="tags">
         <span className="tag tag-cat">{catLabel(catOf(bot))}</span>
-        {bot.strategies.slice(0, 4).map((s) => <span key={s} className="tag tag-strat">{s}</span>)}
-        {bot.chains.slice(0, 3).map((c) => <span key={c} className="tag tag-chain">{c}</span>)}
-        {bot.dexes.slice(0, 3).map((d) => <span key={d} className="tag tag-dex">{d}</span>)}
+        {bot.strategies.slice(0, 4).map((s) => <span key={s} className="tag tag-strat">#{s}</span>)}
+        {bot.chains.slice(0, 3).map((c) => <span key={c} className="tag tag-chain">#{c}</span>)}
+        {bot.dexes.slice(0, 3).map((d) => <span key={d} className="tag tag-dex">#{d}</span>)}
       </div>
       {bot.backtestable && (
         <div className="bt-metrics" title="backtest simulé out-of-sample (moyenne multi-actifs)">

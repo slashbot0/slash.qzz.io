@@ -282,6 +282,41 @@ main {
 .tag-strat { color: #c4b5ff; border-color: rgba(124,92,255,.4); }
 .tag-chain { color: #9fe7ff; border-color: rgba(0,180,255,.3); }
 .tag-dex { color: var(--accent-2); border-color: rgba(0,212,160,.3); }
+
+/* ─── Regroupement par type (#stratégie) ─── */
+.strat-section { margin-top: 30px; }
+.strat-section:first-of-type { margin-top: 10px; }
+.strat-heading {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 14px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--strat, var(--border));
+  font-size: 18px; font-weight: 800; letter-spacing: -.2px;
+}
+.strat-hash { color: var(--strat, var(--text)); }
+.strat-count { font-size: 12px; font-weight: 600; color: var(--muted); }
+.strat-badge {
+  font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px;
+  white-space: nowrap;
+  color: var(--strat, var(--accent));
+  background: color-mix(in srgb, var(--strat, var(--accent)) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--strat, var(--accent)) 42%, transparent);
+}
+/* Couleur dédiée par type de stratégie (héritée via --strat) */
+[data-strategy="arbitrage"]     { --strat: #00d4a0; }
+[data-strategy="flashloan-arb"] { --strat: #5ce1e6; }
+[data-strategy="mev"]           { --strat: #ff7a45; }
+[data-strategy="sandwich"]      { --strat: #ff4d6d; }
+[data-strategy="frontrun"]      { --strat: #ff6b81; }
+[data-strategy="backrun"]       { --strat: #ffa94d; }
+[data-strategy="sniping"]       { --strat: #c4b5ff; }
+[data-strategy="copy-trading"]  { --strat: #ffd343; }
+[data-strategy="grid"]          { --strat: #9fe7ff; }
+[data-strategy="dca"]           { --strat: #6fd3c7; }
+[data-strategy="market-making"] { --strat: #ff8fa3; }
+[data-strategy="liquidation"]   { --strat: #ff5c8a; }
+[data-strategy="jit-liquidity"] { --strat: #b5e48c; }
+[data-strategy="volume-bot"]    { --strat: #f4a261; }
+[data-strategy="ml-ai"]         { --strat: #a78bfa; }
 .meta {
   display: flex; justify-content: space-between; gap: 8px;
   color: var(--muted); font-size: 13px; margin-top: auto; padding-top: 4px;
