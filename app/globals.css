@@ -660,3 +660,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .secondary { grid-template-columns: 1fr; }
   .pv-pfs { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── Comparaison par type ─── */
+.cmp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmp th, .cmp td { padding: 10px 12px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.cmp th:first-child, .cmp td:first-child, .cmp td:last-child, .cmp th:last-child { text-align: left; }
+.cmp thead th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+.cmp tbody tr:hover { background: var(--panel-2); }
+.cmp .cmp-type { font-weight: 600; }
+.cmp .mono { font-family: var(--font-mono), monospace; font-variant-numeric: tabular-nums; }
+.cmp .pos { color: var(--accent-2); }
+.cmp .neg { color: #ff6b81; }
