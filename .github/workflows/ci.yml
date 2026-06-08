@@ -1,23 +1,19 @@
 name: CI
-
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
       - run: npm ci
-      - run: npm run build
-      - name: Lint
-        run: npx next lint --no-cache
-        continue-on-error: true
+      - name: Type-check (gate dur)
+        run: npx tsc --noEmit
+      - name: Build (export statique doit réussir)
+        run: npm run build
