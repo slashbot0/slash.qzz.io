@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-06-04T19:08:45.225Z",
   "stats": {
-    "totalBots": 308,
-    "avgScore": 55.1,
+    "totalBots": 333,
+    "avgScore": 56.1,
     "topLanguage": "Python",
     "flaggedBots": 8,
     "lastScan": "2026-06-04T19:08:45.225Z"
@@ -54,6 +54,7 @@
     "languages": [
       "C#",
       "C++",
+      "Cython",
       "Go",
       "HTML",
       "Java",
@@ -8794,6 +8795,478 @@
       "backtestAssets": [
         "polymarket"
       ]
+    },
+    {
+      "fullName": "OpenBB-finance/OpenBB",
+      "owner": "OpenBB-finance",
+      "repo": "OpenBB",
+      "description": "Financial data platform for analysts, quants and AI agents.",
+      "stars": 68763,
+      "language": "Python",
+      "botScore": 69.25,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:46:22Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "freqtrade/freqtrade",
+      "owner": "freqtrade",
+      "repo": "freqtrade",
+      "description": "Free, open source crypto trading bot",
+      "stars": 51225,
+      "language": "Python",
+      "botScore": 74.65,
+      "chains": [],
+      "dexes": [
+        "hyperliquid"
+      ],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:59:16Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "microsoft/qlib",
+      "owner": "microsoft",
+      "repo": "qlib",
+      "description": "Qlib is an AI-oriented Quant investment platform that aims to use AI tech to empower Quant Research, from exploring ideas to implementing productions. Qlib supports diverse ML modeling paradigms, including supervised learning, market dynamics modeling, and RL, and is now equipped with https://github.com/microsoft/RD-Agent to automate R&D process.",
+      "stars": 44146,
+      "language": "Python",
+      "botScore": 68.2,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:53:31Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "ZhuLinsen/daily_stock_analysis",
+      "owner": "ZhuLinsen",
+      "repo": "daily_stock_analysis",
+      "description": "LLM驱动的 A/H/美股智能分析：多数据源行情 + 实时新闻 + LLM决策仪表盘 + 多渠道推送，零成本定时运行，纯白嫖. LLM-powered stock analysis system for A/H/US markets.",
+      "stars": 41182,
+      "language": "Python",
+      "botScore": 77.5,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:07:52Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "mvanhorn/last30days-skill",
+      "owner": "mvanhorn",
+      "repo": "last30days-skill",
+      "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+      "stars": 31480,
+      "language": "Python",
+      "botScore": 71.5,
+      "chains": [],
+      "dexes": [
+        "polymarket"
+      ],
+      "strategies": [],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:07:46Z",
+      "category": "polymarket",
+      "backtestable": false
+    },
+    {
+      "fullName": "Fincept-Corporation/FinceptTerminal",
+      "owner": "Fincept-Corporation",
+      "repo": "FinceptTerminal",
+      "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
+      "stars": 25910,
+      "language": "C++",
+      "botScore": 76,
+      "chains": [
+        "polygon"
+      ],
+      "dexes": [
+        "hyperliquid"
+      ],
+      "strategies": [
+        "liquidation",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:04:16Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "quantopian/zipline",
+      "owner": "quantopian",
+      "repo": "zipline",
+      "description": "Zipline, a Pythonic Algorithmic Trading Library",
+      "stars": 19850,
+      "language": "Python",
+      "botScore": 57.7,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T19:53:07Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "QuantConnect/Lean",
+      "owner": "QuantConnect",
+      "repo": "Lean",
+      "description": "Lean Algorithmic Trading Engine by QuantConnect (Python, C#)",
+      "stars": 19766,
+      "language": "C#",
+      "botScore": 70.45,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:34:18Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "HKUDS/AI-Trader",
+      "owner": "HKUDS",
+      "repo": "AI-Trader",
+      "description": "\"AI-Trader: 100% Fully-Automated Agent-Native Trading\"  ",
+      "stars": 19391,
+      "language": "Python",
+      "botScore": 70.9,
+      "chains": [],
+      "dexes": [
+        "hyperliquid"
+      ],
+      "strategies": [
+        "copy-trading",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T00:50:05Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "stefan-jansen/machine-learning-for-trading",
+      "owner": "stefan-jansen",
+      "repo": "machine-learning-for-trading",
+      "description": "Code for Machine Learning for Algorithmic Trading, 2nd edition.",
+      "stars": 19069,
+      "language": "Jupyter Notebook",
+      "botScore": 58.45,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "arbitrage",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:45:57Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "UFund-Me/Qbot",
+      "owner": "UFund-Me",
+      "repo": "Qbot",
+      "description": "[🔥updating ...] AI 自动量化交易机器人(完全本地部署) AI-powered Quantitative Investment Research Platform. 📃 online docs: https://ufund-me.github.io/Qbot   ✨ :news: qbot-mini: https://github.com/Charmve/iQuant",
+      "stars": 17567,
+      "language": "Jupyter Notebook",
+      "botScore": 65.95,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:15:01Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "bbfamily/abu",
+      "owner": "bbfamily",
+      "repo": "abu",
+      "description": "阿布量化交易系统(股票，期权，期货，比特币，机器学习) 基于python的开源量化交易，量化投资架构",
+      "stars": 17406,
+      "language": "Python",
+      "botScore": 64,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:04:41Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "AI4Finance-Foundation/FinRL",
+      "owner": "AI4Finance-Foundation",
+      "repo": "FinRL",
+      "description": "FinRL®:  Financial Reinforcement Learning. 🔥",
+      "stars": 15375,
+      "language": "Jupyter Notebook",
+      "botScore": 72.55,
+      "chains": [
+        "polygon"
+      ],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T00:25:50Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "myhhub/stock",
+      "owner": "myhhub",
+      "repo": "stock",
+      "description": "stock股票.获取股票数据,计算股票指标,筹码分布,识别股票形态,综合选股,选股策略,股票验证回测,股票自动交易,支持PC及移动设备。",
+      "stars": 12893,
+      "language": "Python",
+      "botScore": 70.6,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:31:49Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "TA-Lib/ta-lib-python",
+      "owner": "TA-Lib",
+      "repo": "ta-lib-python",
+      "description": "Python wrapper for TA-Lib (http://ta-lib.org/).",
+      "stars": 12025,
+      "language": "Cython",
+      "botScore": 68.2,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T19:40:54Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "goldmansachs/gs-quant",
+      "owner": "goldmansachs",
+      "repo": "gs-quant",
+      "description": "Python toolkit for quantitative finance",
+      "stars": 10586,
+      "language": "Jupyter Notebook",
+      "botScore": 70.45,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:51:06Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "askmike/gekko",
+      "owner": "askmike",
+      "repo": "gekko",
+      "description": "A bitcoin trading bot written in node - https://gekko.wizb.it/",
+      "stars": 10175,
+      "language": "JavaScript",
+      "botScore": 64,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T21:55:16Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "StockSharp/StockSharp",
+      "owner": "StockSharp",
+      "repo": "StockSharp",
+      "description": "Algorithmic trading and quantitative trading open source platform to develop trading robots (stock markets, forex, crypto, bitcoins, and options).",
+      "stars": 10051,
+      "language": "C#",
+      "botScore": 75.25,
+      "chains": [
+        "polygon"
+      ],
+      "dexes": [
+        "hyperliquid"
+      ],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:03:39Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "je-suis-tm/quant-trading",
+      "owner": "je-suis-tm",
+      "repo": "quant-trading",
+      "description": "Python quantitative trading strategies including VIX Calculator, Pattern Recognition, Commodity Trading Advisor, Monte Carlo, Options Straddle, Shooting Star, London Breakout, Heikin-Ashi, Pair Trading, RSI, Bollinger Bands, Parabolic SAR, Dual Thrust, Awesome, MACD",
+      "stars": 10039,
+      "language": "Python",
+      "botScore": 59.95,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "arbitrage",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T21:13:31Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "huseinzol05/Stock-Prediction-Models",
+      "owner": "huseinzol05",
+      "repo": "Stock-Prediction-Models",
+      "description": "Gathers machine learning and deep learning models for Stock forecasting including trading bots and simulations",
+      "stars": 9378,
+      "language": "Jupyter Notebook",
+      "botScore": 56.5,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T22:57:16Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "firmai/financial-machine-learning",
+      "owner": "firmai",
+      "repo": "financial-machine-learning",
+      "description": "A curated list of practical financial machine learning tools and applications.",
+      "stars": 8618,
+      "language": "Python",
+      "botScore": 59.05,
+      "chains": [],
+      "dexes": [
+        "pancakeswap"
+      ],
+      "strategies": [
+        "market-making",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T01:38:01Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "kernc/backtesting.py",
+      "owner": "kernc",
+      "repo": "backtesting.py",
+      "description": "🔎 📈 🐍 💰  Backtest trading strategies in Python.",
+      "stars": 8489,
+      "language": "Python",
+      "botScore": 62.95,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-07T21:45:57Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "jesse-ai/jesse",
+      "owner": "jesse-ai",
+      "repo": "jesse",
+      "description": "An advanced crypto trading bot written in Python",
+      "stars": 7992,
+      "language": "JavaScript",
+      "botScore": 72.55,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:51:03Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "polakowo/vectorbt",
+      "owner": "polakowo",
+      "repo": "vectorbt",
+      "description": "The backtesting engine that gives you an unfair advantage. Run thousands of trading ideas before others finish one.",
+      "stars": 7833,
+      "language": "Python",
+      "botScore": 65.95,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T02:35:01Z",
+      "category": "ml-ai",
+      "backtestable": false
+    },
+    {
+      "fullName": "brokermr810/QuantDinger",
+      "owner": "brokermr810",
+      "repo": "QuantDinger",
+      "description": "AI quantitative trading platform for crypto, stocks, and forex with backtesting, live trading, market data, and multi-agent research.vibe-trading ,trading-agents,ai-trader,ai-trading",
+      "stars": 7475,
+      "language": "Python",
+      "botScore": 75.1,
+      "chains": [],
+      "dexes": [],
+      "strategies": [
+        "copy-trading",
+        "ml-ai"
+      ],
+      "redFlagCount": 0,
+      "updatedAt": "2026-06-08T03:06:24Z",
+      "category": "ml-ai",
+      "backtestable": false
     }
   ],
   "backtest": {
