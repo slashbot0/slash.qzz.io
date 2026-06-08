@@ -2,6 +2,7 @@ import Link from "next/link"
 import dataset from "../../../../data/bots.json"
 import type { Bot, Dataset } from "../../../../lib/types"
 import { securityBadge } from "../../../../lib/types"
+import { pct, num, cls } from "../../../../lib/format"
 import { notFound } from "next/navigation"
 
 const data = dataset as Dataset
@@ -16,10 +17,6 @@ export function generateMetadata({ params }: { params: { owner: string; repo: st
   return { title: `${params.owner}/${params.repo} — backtest | Slash` }
 }
 
-const pct = (x: number | null | undefined, signed = false) =>
-  x == null ? "—" : `${signed && x >= 0 ? "+" : ""}${(x * 100).toFixed(1)}%`
-const num = (x: number | null | undefined, d = 2) => (x == null ? "—" : x.toFixed(d))
-const cls = (x: number | null | undefined) => ((x ?? 0) >= 0 ? "pos" : "neg")
 
 function Chart({ data: curve }: { data: number[] }) {
   const w = 720, h = 180, pad = 10
