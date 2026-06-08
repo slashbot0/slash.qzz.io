@@ -9,6 +9,9 @@ const LINKS = [
   { href: "/compare", label: "comparer" },
   { href: "/backtests", label: "backtests" },
   { href: "/paper", label: "paper" },
+  { href: "/polymarket", label: "polymarket" },
+  { href: "/telegram-wallet", label: "wallet" },
+  { href: "/freedom", label: "freedom" },
   { href: "/methodologie", label: "méthodologie" },
 ]
 

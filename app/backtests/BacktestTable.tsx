@@ -3,26 +3,22 @@
 import Link from "next/link"
 import { Fragment, useMemo, useState } from "react"
 import type { Bot } from "../../lib/types"
+import { pct, num, cls } from "../../lib/format"
 
 type Key =
   | "botScore" | "backtestReturn" | "backtestAlpha" | "backtestWinRate"
   | "backtestTrades" | "backtestProfitFactor" | "backtestSharpe"
   | "backtestSortino" | "backtestDrawdown"
 
-const pct = (x: number | null | undefined, signed = false) =>
-  x == null ? "—" : `${signed && x >= 0 ? "+" : ""}${(x * 100).toFixed(0)}%`
-const num = (x: number | null | undefined, d = 1) => (x == null ? "—" : x.toFixed(d))
-const sign = (x: number | null | undefined) => ((x ?? 0) >= 0 ? "pos" : "neg")
-
 const COLS: { key: Key; label: string; title: string; fmt: (b: Bot) => string; cls?: (b: Bot) => string }[] = [
-  { key: "backtestAlpha", label: "α vs hold", title: "rendement du bot moins un simple buy & hold", fmt: (b) => pct(b.backtestAlpha, true), cls: (b) => sign(b.backtestAlpha) },
-  { key: "backtestReturn", label: "rendement", title: "rendement out-of-sample simulé", fmt: (b) => pct(b.backtestReturn, true), cls: (b) => sign(b.backtestReturn) },
-  { key: "backtestWinRate", label: "win", title: "part de trades gagnants", fmt: (b) => pct(b.backtestWinRate) },
+  { key: "backtestAlpha", label: "α vs hold", title: "rendement du bot moins un simple buy & hold", fmt: (b) => pct(b.backtestAlpha, true, 0), cls: (b) => cls(b.backtestAlpha) },
+  { key: "backtestReturn", label: "rendement", title: "rendement out-of-sample simulé", fmt: (b) => pct(b.backtestReturn, true, 0), cls: (b) => cls(b.backtestReturn) },
+  { key: "backtestWinRate", label: "win", title: "part de trades gagnants", fmt: (b) => pct(b.backtestWinRate, false, 0) },
   { key: "backtestTrades", label: "trades", title: "nombre de trades simulés", fmt: (b) => num(b.backtestTrades, 0) },
   { key: "backtestProfitFactor", label: "PF", title: "profit factor : gains/pertes réalisés", fmt: (b) => num(b.backtestProfitFactor, 1) },
   { key: "backtestSharpe", label: "Sharpe", title: "Sharpe annualisé", fmt: (b) => num(b.backtestSharpe, 2) },
   { key: "backtestSortino", label: "Sortino", title: "Sortino annualisé (risque baissier)", fmt: (b) => num(b.backtestSortino, 2) },
-  { key: "backtestDrawdown", label: "drawdown", title: "pire perte pic-à-creux", fmt: (b) => pct(b.backtestDrawdown) },
+  { key: "backtestDrawdown", label: "drawdown", title: "pire perte pic-à-creux", fmt: (b) => pct(b.backtestDrawdown, false, 0) },
   { key: "botScore", label: "score code", title: "qualité + sécurité du code", fmt: (b) => num(b.botScore, 0) },
 ]
 
@@ -55,14 +51,14 @@ const uniq = (xs: string[]) => [...new Set(xs)].sort()
 
 function Detail({ b }: { b: Bot }) {
   const items: [string, string, string?][] = [
-    ["rendement", pct(b.backtestReturn, true), sign(b.backtestReturn)],
-    ["α vs hold", pct(b.backtestAlpha, true), sign(b.backtestAlpha)],
-    ["win rate", pct(b.backtestWinRate)],
+    ["rendement", pct(b.backtestReturn, true, 0), cls(b.backtestReturn)],
+    ["α vs hold", pct(b.backtestAlpha, true, 0), cls(b.backtestAlpha)],
+    ["win rate", pct(b.backtestWinRate, false, 0)],
     ["trades", num(b.backtestTrades, 0)],
     ["profit factor", num(b.backtestProfitFactor, 2)],
     ["Sharpe", num(b.backtestSharpe, 2)],
     ["Sortino", num(b.backtestSortino, 2)],
-    ["drawdown", pct(b.backtestDrawdown)],
+    ["drawdown", pct(b.backtestDrawdown, false, 0)],
     ["exposition moy.", pct(b.backtestExposure)],
     ["marché", `${b.backtestStrategy} · ${b.backtestMarket}`],
   ]
