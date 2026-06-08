@@ -1,0 +1,145 @@
+{
+  "source": "polymarket-stack/tools/paper_metrics.py",
+  "generated": "2026-06-08T06:03:09Z",
+  "simulated": false,
+  "kind": "prediction-market-bot-live",
+  "crash_bot": null,
+  "falcon_copy": {
+    "total_copies": 234,
+    "unique_wallets": 5,
+    "total_volume_usd": 271857.37,
+    "unique_markets": 33,
+    "last_run": "2026-06-03T04:14:33.584823",
+    "top_wallets": [
+      {
+        "addr": "0x7c3db723f1",
+        "wr": 81.2,
+        "sharpe": 0.48,
+        "score": 72.901,
+        "pnl": "20503.24"
+      },
+      {
+        "addr": "0xb0143b386a",
+        "wr": 78.2,
+        "sharpe": 0.72,
+        "score": 70.634,
+        "pnl": "72480.98"
+      },
+      {
+        "addr": "0x6982049c65",
+        "wr": 78.9,
+        "sharpe": 0.57,
+        "score": 73.978,
+        "pnl": "47990.57"
+      },
+      {
+        "addr": "0xe3611dada6",
+        "wr": 71.8,
+        "sharpe": 0.91,
+        "score": 71.828,
+        "pnl": "71702.56"
+      },
+      {
+        "addr": "0xb10047d6a2",
+        "wr": 77.6,
+        "sharpe": 0.33,
+        "score": 72.144,
+        "pnl": "76697.69"
+      }
+    ],
+    "wallet_stats": [
+      {
+        "addr": "0x7c3db723f1d4",
+        "copies": 47,
+        "volume": 100249.96,
+        "markets": 5
+      },
+      {
+        "addr": "0xb10047d6a254",
+        "copies": 38,
+        "volume": 82356.59,
+        "markets": 8
+      },
+      {
+        "addr": "0x6982049c65e9",
+        "copies": 50,
+        "volume": 41806.98,
+        "markets": 4
+      },
+      {
+        "addr": "0xb0143b386a9e",
+        "copies": 49,
+        "volume": 36003.12,
+        "markets": 11
+      },
+      {
+        "addr": "0xe3611dada6c5",
+        "copies": 50,
+        "volume": 11440.72,
+        "markets": 6
+      }
+    ],
+    "top_markets": [
+      {
+        "slug": "0xbc54d73527785bdc7b443cfdf3b0d59558c5ac2bbffca23425ecfbd161b07317",
+        "count": 23
+      },
+      {
+        "slug": "0x6efdd6a5ace67dda6fab780b8f75e39b0a2a1aa5939eb50eb9ba70cf279afb12",
+        "count": 19
+      },
+      {
+        "slug": "0x3733a1b647e7364095736ab0966465d896a84cf3b6bc1695ca1f26c3239b3868",
+        "count": 17
+      },
+      {
+        "slug": "0xdb3aad231169ba4fb5276901191dafa3faa555547a751bf478ac2e229673981e",
+        "count": 17
+      },
+      {
+        "slug": "0x1f7f81a28bdabae4d6df7e7166344141712644fb014384d6f202d709f61c3706",
+        "count": 17
+      },
+      {
+        "slug": "0x1a3dc718fd704ed5788f7b5c488c3dc12304ef60a52d36fdfbd6f744a9461b57",
+        "count": 13
+      },
+      {
+        "slug": "0x348cd9adf4f6855f58bd9c6dbf9ff251c4142ef77233a5dc95c65b4b61cd2187",
+        "count": 13
+      },
+      {
+        "slug": "0xfa46bbde8cd9a3cbeebceea2717f5ab78c1149501e1f271c28417a5ac8af383c",
+        "count": 12
+      },
+      {
+        "slug": "0x5bcdcc533e010ccd9a84ab38b2a920fe6cfada499b944cba60d5d814c6079be0",
+        "count": 11
+      },
+      {
+        "slug": "0x5a965e943de13a4bdef4fb568d94341a751f02a2f652fa4fb8377d8b02f84606",
+        "count": 10
+      },
+      {
+        "slug": "0x318ac7d52f5295692fdd08858619c2a12c95f32ee20bc8a319dae85d0ffd704e",
+        "count": 7
+      },
+      {
+        "slug": "0x97361d170cf9ee2a658970e88188e250edfa8a296c96b38e94f02cf3303c7b68",
+        "count": 7
+      },
+      {
+        "slug": "0x3fe18d2b6303ee3a7e406aab679dbc0b0f7504dc6b477a31c69c6ffb04e9e11c",
+        "count": 7
+      },
+      {
+        "slug": "0x34d82d67c41159ae3f1c313364744c9d0f97573d7dea57b96b1fdfb6718c2949",
+        "count": 6
+      },
+      {
+        "slug": "0x94de16ed0096861e8c2b1dbc064c31c1382b02582c1cf3ec7f13237b67801f82",
+        "count": 6
+      }
+    ]
+  }
+}

@@ -12,6 +12,7 @@ const LINKS = [
   { href: "/polymarket", label: "polymarket" },
   { href: "/telegram-wallet", label: "wallet" },
   { href: "/freedom", label: "freedom" },
+  { href: "/outils", label: "outils" },
   { href: "/methodologie", label: "méthodologie" },
 ]
 

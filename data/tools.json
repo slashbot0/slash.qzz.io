@@ -1,0 +1,72 @@
+{
+  "Web3 Trading": {
+    "github": [],
+    "npm": [
+      {
+        "name": "@uniswap/sdk-core",
+        "desc": "⚒️ An SDK for building applications on top of Uniswap V3",
+        "url": "https://www.npmjs.com/package/@uniswap/sdk-core",
+        "score": 256.69534
+      },
+      {
+        "name": "@uniswap/sdk",
+        "desc": "🛠 An SDK for building applications on top of Uniswap.",
+        "url": "https://www.npmjs.com/package/@uniswap/sdk",
+        "score": 255.38643
+      },
+      {
+        "name": "@cowprotocol/currency",
+        "desc": "CoW Swap re-exports of @uniswap/sdk-core entities",
+        "url": "https://www.npmjs.com/package/@cowprotocol/currency",
+        "score": 237.81876
+      },
+      {
+        "name": "solana-meme-sdk",
+        "desc": "Solana Meme Token SDK - DEX Trading, Token Creation, and Bundle Services",
+        "url": "https://www.npmjs.com/package/solana-meme-sdk",
+        "score": 223.46599
+      },
+      {
+        "name": "@reyaxyz/api-v2-sdk",
+        "desc": "Generated TypeScript SDK for Reya DEX Trading API v2 (REST + WebSocket types + ws-exec types)",
+        "url": "https://www.npmjs.com/package/@reyaxyz/api-v2-sdk",
+        "score": 216.02441
+      }
+    ]
+  },
+  "Polymarket": {
+    "github": [],
+    "npm": [
+      {
+        "name": "@phessophissy/btc-prediction-market-sdk",
+        "desc": "TypeScript SDK for Bitcoin Prediction Market",
+        "url": "https://www.npmjs.com/package/@phessophissy/btc-prediction-market-sdk",
+        "score": 514.31464
+      },
+      {
+        "name": "polymarket",
+        "desc": "",
+        "url": "https://www.npmjs.com/package/polymarket",
+        "score": 454.0617
+      },
+      {
+        "name": "@polymarket/builder-signing-sdk",
+        "desc": "Polymarket SDK for creating builder headers",
+        "url": "https://www.npmjs.com/package/@polymarket/builder-signing-sdk",
+        "score": 435.99127
+      },
+      {
+        "name": "@polymarket/builder-relayer-client",
+        "desc": "Client for Polymarket relayers",
+        "url": "https://www.npmjs.com/package/@polymarket/builder-relayer-client",
+        "score": 431.8298
+      },
+      {
+        "name": "@pmxt/mcp",
+        "desc": "MCP server for PMXT - the unified prediction market API",
+        "url": "https://www.npmjs.com/package/@pmxt/mcp",
+        "score": 394.1729
+      }
+    ]
+  }
+}
