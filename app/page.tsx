@@ -46,7 +46,7 @@ const WORKFLOWS = [
 const SECONDARY = [
   { icon: IconTarget, name: "Polymarket Tools", desc: "Scan de traders, early movers, edge scoring, MCP.", href: "/polymarket" },
   { icon: IconWallet, name: "Telegram Wallet Bot", desc: "Wallets multi-chain + déploiement vers projets validés.", href: "/telegram-wallet" },
-  { icon: IconGlobe, name: "Freedom Project", desc: "Domaines/DNS/emails + routeur LLM multi-provider.", href: `${GITHUB}/freedom-project` },
+  { icon: IconGlobe, name: "Freedom Project", desc: "Domaines/DNS/emails + routeur LLM multi-provider.", href: "/freedom" },
   { icon: IconSignal, name: "Phone Home", desc: "Tracking de visites — notification Telegram formatée.", href: "/phone-home" },
 ]
 
