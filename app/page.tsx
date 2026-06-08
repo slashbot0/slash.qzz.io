@@ -2,6 +2,7 @@ import Link from "next/link"
 import data from "../data/bots.json"
 import paperPm from "../data/paper-polymarket.json"
 import HomePreview from "./components/HomePreview"
+import SecondaryCard from "./components/SecondaryCard"
 import {
   IconIndex,
   IconChart,
@@ -140,23 +141,16 @@ export default function Home() {
       <section className="block">
         <h2 className="block-title">Le reste de la suite</h2>
         <div className="secondary">
-          {SECONDARY.map((s) => {
-            const ext = s.href.startsWith("http")
-            const inner = (
-              <>
-                <s.icon className="sec-ic" />
-                <div className="sec-text">
-                  <span className="sec-name">{s.name}{ext && <span className="sec-ext"> ↗</span>}</span>
-                  <span className="sec-desc">{s.desc}</span>
-                </div>
-              </>
-            )
-            return ext ? (
-              <a key={s.name} href={s.href} className="sec-card" target="_blank" rel="noreferrer">{inner}</a>
-            ) : (
-              <Link key={s.name} href={s.href} className="sec-card">{inner}</Link>
-            )
-          })}
+          {SECONDARY.map((s) => (
+            <SecondaryCard
+              key={s.name}
+              icon={s.icon}
+              name={s.name}
+              desc={s.desc}
+              href={s.href}
+              external={s.href.startsWith("http")}
+            />
+          ))}
         </div>
       </section>
     </main>
