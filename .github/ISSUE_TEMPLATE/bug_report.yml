@@ -1,0 +1,14 @@
+name: Bug Report
+about: Signaler un bug
+title: '[BUG] '
+labels: bug
+assignees: ''
+---
+**Description**
+Un bug clair et concis.
+
+**Reproduction**
+Steps pour reproduire.
+
+**Comportement attendu**
+Ce qui devrait se passer.
