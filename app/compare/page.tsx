@@ -1,9 +1,9 @@
 import Link from "next/link"
 import data from "../../data/bots.json"
 import type { Bot } from "../../lib/types"
+import { pct } from "../../lib/format"
 
 const bots = data.bots as Bot[]
-const pct = (x: number, signed = false) => `${signed && x >= 0 ? "+" : ""}${(x * 100).toFixed(0)}%`
 const shortName = (full: string) => full.split("/").pop() ?? full
 const catLabel = (c: string) =>
   ({ "web3-dex": "🤖 Web3 / DEX", polymarket: "🎯 Polymarket", "ml-ai": "🧠 ML / AI" }[c] ?? c)
@@ -60,11 +60,11 @@ function Table({ rows, label }: { rows: Row[]; label: (k: string) => string }) {
               <td className="mono">{r.count}</td>
               <td className="mono">{r.backtested}</td>
               <td className="mono">{r.avgScore.toFixed(0)}</td>
-              <td className={`mono ${(r.avgAlpha ?? 0) >= 0 ? "pos" : "neg"}`}>{r.avgAlpha == null ? "—" : pct(r.avgAlpha, true)}</td>
-              <td className="mono">{pct(r.cleanPct)}</td>
+              <td className={`mono ${(r.avgAlpha ?? 0) >= 0 ? "pos" : "neg"}`}>{r.avgAlpha == null ? "—" : pct(r.avgAlpha, true, 0)}</td>
+              <td className="mono">{pct(r.cleanPct, false, 0)}</td>
               <td>{r.best ? (
                 <a href={`https://github.com/${r.best.fullName}`} target="_blank" rel="noreferrer">
-                  {shortName(r.best.fullName)} <span className="pos">{pct(r.best.backtestAlpha ?? 0, true)}</span>
+                  {shortName(r.best.fullName)} <span className="pos">{pct(r.best.backtestAlpha ?? 0, true, 0)}</span>
                 </a>
               ) : "—"}</td>
             </tr>

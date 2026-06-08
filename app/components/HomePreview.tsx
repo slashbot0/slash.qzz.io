@@ -7,8 +7,8 @@ import paperPm from "../../data/paper-polymarket.json"
 import type { Bot } from "../../lib/types"
 import { securityBadge } from "../../lib/types"
 import { Spark } from "./Spark"
+import { pct } from "../../lib/format"
 
-const pct = (x: number) => `${x >= 0 ? "+" : ""}${(x * 100).toFixed(0)}%`
 const shortName = (full: string) => full.split("/").pop() ?? full
 
 const topAlpha: Bot[] = (data.bots as Bot[])
@@ -22,7 +22,7 @@ function MiniPortfolio({ label, ret, curve }: { label: string; ret: number; curv
     <div className="pv-pf">
       <div className="pv-pf-head">
         <span className="pv-pf-label">{label}</span>
-        <span className={`pv-pf-ret ${ret >= 0 ? "pos" : "neg"}`}>{pct(ret)}</span>
+        <span className={`pv-pf-ret ${ret >= 0 ? "pos" : "neg"}`}>{pct(ret, true, 0)}</span>
       </div>
       <Spark data={norm} w={150} h={40} sw={1.8} fill />
     </div>
@@ -46,7 +46,7 @@ export default function HomePreview() {
               <span className="pv-rank">{i + 1}</span>
               <span className="pv-name" title={b.fullName}>{shortName(b.fullName)}</span>
               <Spark data={b.backtestCurve} w={84} h={22} sw={1.4} />
-              <span className="pv-alpha pos">α {pct(b.backtestAlpha ?? 0)}</span>
+              <span className="pv-alpha pos">α {pct(b.backtestAlpha ?? 0, true, 0)}</span>
               <span className={`pv-sec ${badge.cls}`} title={badge.label}>
                 {b.redFlagCount > 0 ? "⚠" : "✓"}
               </span>

@@ -2,15 +2,14 @@ import Link from "next/link"
 import paper from "../../data/paper.json"
 import paperPm from "../../data/paper-polymarket.json"
 import live from "../../data/paper-live.json"
+import { pct, cls } from "../../lib/format"
 
 export const metadata = {
   title: "Paper trading — Slash",
   description: "Portefeuilles papier simulés (Web3/DEX + Polymarket) à partir des backtests et simulations.",
 }
 
-const pct = (x: number, signed = false) => `${signed && x >= 0 ? "+" : ""}${(x * 100).toFixed(1)}%`
 const eur = (x: number) => `$${x.toLocaleString("fr-FR", { maximumFractionDigits: 0 })}`
-const cls = (x: number) => (x >= 0 ? "pos" : "neg")
 
 function Chart({ curve, base }: { curve: number[]; base: number }) {
   const w = 760, h = 200, pad = 12

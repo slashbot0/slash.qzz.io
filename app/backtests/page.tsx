@@ -2,13 +2,13 @@ import Link from "next/link"
 import dataset from "../../data/bots.json"
 import type { Dataset } from "../../lib/types"
 import BacktestTable from "./BacktestTable"
+import { pct } from "../../lib/format"
 
 export const metadata = {
   title: "Backtests — Slash",
   description: "Performance simulée out-of-sample des bots de trading: alpha vs hold, win rate, profit factor.",
 }
 
-const pct = (x: number) => `${(x * 100).toFixed(0)}%`
 
 export default function Page() {
   const data = dataset as Dataset
@@ -32,8 +32,8 @@ export default function Page() {
         <p className="sim-banner">📈 <strong>Spot</strong> : backtest out-of-sample sur données réelles. 🌤️ <strong>Marché de prédiction</strong> : simulation forward de l&apos;archétype de stratégie. Les deux sont <strong>simulés — pas des gains réels.</strong></p>
         <div className="stats">
           <div className="stat"><div className="stat-value">{beat}/{bots.length}</div><div className="stat-label">battent le hold (α &gt; 0)</div></div>
-          <div className="stat"><div className="stat-value">{pct(avgWin)}</div><div className="stat-label">win rate moyen</div></div>
-          <div className="stat"><div className={`stat-value ${avgAlpha >= 0 ? "" : "stat-warn"}`}>{avgAlpha >= 0 ? "+" : ""}{pct(avgAlpha)}</div><div className="stat-label">alpha moyen vs hold</div></div>
+          <div className="stat"><div className="stat-value">{pct(avgWin, false, 0)}</div><div className="stat-label">win rate moyen</div></div>
+          <div className="stat"><div className={`stat-value ${avgAlpha >= 0 ? "" : "stat-warn"}`}>{avgAlpha >= 0 ? "+" : ""}{pct(avgAlpha, false, 0)}</div><div className="stat-label">alpha moyen vs hold</div></div>
         </div>
       </header>
 

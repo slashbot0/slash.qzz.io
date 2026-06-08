@@ -4,9 +4,9 @@ import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import type { Bot, Dataset } from "../../lib/types"
 import { securityBadge, combinedRank } from "../../lib/types"
+import { pct } from "../../lib/format"
 
 const PROFIT_STRATEGIES = ["arbitrage", "mev", "sniping", "flashloan-arb", "sandwich"]
-const fmtPct = (x: number) => `${x >= 0 ? "+" : ""}${(x * 100).toFixed(0)}%`
 type Sort = "rank" | "score" | "buzz" | "backtest" | "alpha"
 
 const CATEGORIES: { value: string; label: string }[] = [
@@ -246,7 +246,7 @@ function BotCard({ bot, rank }: { bot: Bot; rank: number }) {
       </div>
       {bot.backtestable && (
         <div className="bt-metrics" title="backtest simulé out-of-sample (moyenne multi-actifs)">
-          <span className={(bot.backtestAlpha ?? 0) >= 0 ? "bt-pos" : "bt-neg"} title="alpha : rendement du bot moins buy & hold">α {fmtPct(bot.backtestAlpha ?? 0)}</span>
+          <span className={(bot.backtestAlpha ?? 0) >= 0 ? "bt-pos" : "bt-neg"} title="alpha : rendement du bot moins buy & hold">α {pct(bot.backtestAlpha ?? 0, true, 0)}</span>
           <span title="part de trades gagnants">win {bot.backtestWinRate == null ? "—" : `${Math.round(bot.backtestWinRate * 100)}%`}</span>
           <span title="nombre de trades simulés">{bot.backtestTrades ?? 0} tr</span>
           <span title="profit factor">PF {bot.backtestProfitFactor == null ? "—" : bot.backtestProfitFactor.toFixed(1)}</span>
