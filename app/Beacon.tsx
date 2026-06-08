@@ -19,7 +19,7 @@ export default function Beacon() {
           cache: "no-store",
         })
         if (!res.ok) return
-        const cfg = (await res.json()) as { url?: string }
+        const cfg = (await res.json()) as { url?: string; key?: string }
         if (cancelled || !cfg?.url) return
 
         const params = new URLSearchParams({
@@ -28,6 +28,8 @@ export default function Beacon() {
           s: `${window.screen.width}x${window.screen.height}`,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
         })
+        // Secret partagé (publié à côté de l'URL) exigé par le tracker.
+        if (cfg.key) params.set("k", cfg.key)
         const img = new Image()
         img.referrerPolicy = "no-referrer-when-downgrade"
         img.src = `${cfg.url}?${params.toString()}`
