@@ -18,6 +18,9 @@ export const metadata: Metadata = {
       "De la découverte GitHub au paper trading forward : trouve les stratégies qui tiennent, mesure leur alpha, suis-les dans le temps.",
     type: "website",
   },
+  other: {
+    "facebook-domain-verification": "mig9pdf5vm3ayg8sjdu98axmzh78g3",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
