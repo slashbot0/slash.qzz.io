@@ -3,3 +3,24 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 out/
+
+# secrets
+.env
+.env.local
+.env.*
+*.env
+.credentials.json
+*.credentials.json
+service-account.json
+*.pem
+*.key
+*cookies*
+track-endpoint.json
+
+# logs
+*.log
+
+# os / editors
+.DS_Store
+.idea/
+.vscode/
